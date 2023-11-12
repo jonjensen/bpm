@@ -13,7 +13,7 @@ const MIN_SECONDS_BETWEEN_BEATS: f32 = 0.1;
 
 fn main() {
     println!("Press the space bar every time you hear the beat.");
-    println!("Press the escape key during the last beat to show how many beats per minute (bpm) there were and then reset.");
+    println!("Press the enter, tab, or escape keys at the last beat to show how many beats per minute (bpm) there were and then reset the counter.");
     println!("Press control-C to quit.\n");
 
     let stdin = stdin();
@@ -28,7 +28,7 @@ fn main() {
         let evt = c.unwrap();
         match evt {
             Event::Key(Key::Ctrl('c')) => break,
-            Event::Key(Key::Esc) => {
+            Event::Key(Key::Esc) | Event::Key(Key::Char('\n')) | Event::Key(Key::Char('\t')) => {
                 if printed {
                     print!("\r\n");
                 }
