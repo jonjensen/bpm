@@ -1,0 +1,11 @@
+[package]
+name = "bpm"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jon Jensen <jon@swelter.net>"]
+
+[dependencies]
+termion = "2.0.3"
+
+[profile.release]
+overflow-checks = true
