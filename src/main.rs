@@ -9,6 +9,8 @@ use termion::event::{Event, Key};
 use termion::input::TermRead;
 use termion::raw::IntoRawMode;
 
+const MIN_SECONDS_BETWEEN_BEATS: f32 = 0.1;
+
 fn main() {
     println!("Press the space bar every time you hear the beat.");
     println!("Press the escape key during the last beat to show how many beats per minute (bpm) there were and then reset.");
@@ -41,7 +43,7 @@ fn main() {
             }
             Event::Key(Key::Char(' ')) => {
                 let first_beat = beat_count < 1;
-                if first_beat || last_time.elapsed().as_secs_f32() > 0.1 {
+                if first_beat || last_time.elapsed().as_secs_f32() > MIN_SECONDS_BETWEEN_BEATS {
                     last_time = Instant::now();
                     if first_beat {
                         start_time = last_time;
